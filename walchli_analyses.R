@@ -26,7 +26,7 @@ long_rep_data <- jump_data %>%
 
 long_rep_data$condition <- as.factor(long_rep_data$condition)
 
-# Descriptives
+# Descriptives --------
 
 # mean and sd of data
 summary_rep <- long_rep_data %>% 
@@ -35,7 +35,6 @@ summary_rep <- long_rep_data %>%
             mean = mean(jump_height, na.rm=TRUE),
             sd = sd(jump_height, na.rm = TRUE))
 summary_rep 
-
 
 ## ANOVA -----
 # RM ANOVA 
@@ -62,7 +61,6 @@ long_rep_data %>%
 long_rep_data %>%
   group_by(condition) %>%
   identify_outliers(jump_height)
-
 
 ## Plots ---------
 
@@ -95,8 +93,8 @@ long_rep_data %>%
 ## Replication effect size and CI -------
 
 pes_ci_rep <- eta.F(
-  dfm = 5,
-  dfe = 195,
+  dfm = anova_results_rep$anova_table$`num Df`,
+  dfe = anova_results_rep$anova_table$`den Df`,
   Fvalue = anova_results_rep$anova_table$F,
   a = 0.05) %>%
   as.data.frame() %>%
