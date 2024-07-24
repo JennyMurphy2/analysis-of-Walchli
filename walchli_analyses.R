@@ -9,6 +9,8 @@ library(tidyverse)
 library(janitor)
 library(MOTE)
 
+set.seed(21)
+
 # Import and prepare data 
 
 rep_data <- read_csv("jump_reward_data.csv") 
